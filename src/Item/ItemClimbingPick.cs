@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using Vintagestory.API.Common;
 using Vintagestory.API.Server;
 using Vintagestory.GameContent;
@@ -18,7 +18,7 @@ namespace UsefulStuff
             if (UsefulStuffConfig.Loaded.ClimbingPickDisabledInProtected)
             {
                 bool bossnear = false;
-                entityUtil?.WalkEntities(byEntity.SidedPos.XYZ, 30, (e) =>
+                entityUtil?.WalkEntities(byEntity.Pos.XYZ, 30, (e) =>
                 {
                     if (e?.Properties?.Attributes?.IsTrue("isBoss") == true)
                     {

@@ -1,4 +1,4 @@
-﻿using BuffStuff;
+using BuffStuff;
 using HarmonyLib;
 using System;
 using System.Collections.Generic;
@@ -34,7 +34,7 @@ namespace UsefulStuff
         static void Postfix(EntityPlayer __instance, ref byte[] __result)
         {
             IInventory backpack = __instance.Player?.InventoryManager.GetInventory(GlobalConstants.backpackInvClassName + "-" + __instance.PlayerUID);
-            if (backpack == null || backpack.Count < 5 || backpack[0].Itemstack?.Collectible.Code.Path.Contains("backpack") != true || backpack[4].Itemstack?.Collectible.Code.Path.Contains("lantern") != true) return;
+            if (backpack == null || backpack.Count < 5 || (backpack[0].Itemstack?.Collectible.Code.Path.Contains("backpack") != true && backpack[0].Itemstack?.Collectible.Code.Path.Contains("ithania") != true) || backpack[4].Itemstack?.Collectible.Code.Path.Contains("lantern") != true) return;
 
             byte[] clipon = backpack[4].Itemstack?.Block?.LightHsv;
             if (clipon == null) return;
@@ -61,8 +61,9 @@ namespace UsefulStuff
     public class SpecialArrows
     {
         [HarmonyPrepare]
-        static bool Prepare()
+        static bool Prepare(MethodBase original, Harmony harmony)
         {
+            if (original == null) return false;
             return true;
         }
 
@@ -82,7 +83,7 @@ namespace UsefulStuff
 
             if (world != null && __instance.ProjectileStack?.Attributes?.GetString("tip") == "explosive" && UsefulStuffConfig.Loaded.ExplosiveArrowEnabled)
             {
-                world.CreateExplosion(__instance.ServerPos.AsBlockPos, EnumBlastType.RockBlast, 1, 3);
+                world.CreateExplosion(__instance.Pos.AsBlockPos, EnumBlastType.RockBlast, 1, 3);
                 __instance.Die();
             }
 
@@ -93,11 +94,11 @@ namespace UsefulStuff
 
                 if (bee != null)
                 {
-                    bee.ServerPos.X = __instance.SidedPos.X + 0.5f;
-                    bee.ServerPos.Y = __instance.SidedPos.Y + 0.5f;
-                    bee.ServerPos.Z = __instance.SidedPos.Z + 0.5f;
-                    bee.ServerPos.Yaw = (float)__instance.World.Rand.NextDouble() * 2 * GameMath.PI;
-                    bee.Pos.SetFrom(bee.ServerPos);
+                    bee.Pos.X = __instance.Pos.X + 0.5f;
+                    bee.Pos.Y = __instance.Pos.Y + 0.5f;
+                    bee.Pos.Z = __instance.Pos.Z + 0.5f;
+                    bee.Pos.Yaw = (float)__instance.World.Rand.NextDouble() * 2 * GameMath.PI;
+                    bee.Pos.SetFrom(bee.Pos);
 
                     bee.Attributes.SetString("origin", "beearrow");
                     __instance.World.SpawnEntity(bee);
@@ -108,36 +109,37 @@ namespace UsefulStuff
         }
 
         [HarmonyPostfix]
-        [HarmonyPatch("impactOnEntity")]
-        static void entImpact(EntityProjectile __instance, Entity entity)
+        [HarmonyPatch("ImpactOnEntity")]
+        [HarmonyPatch(new Type[] { typeof(Entity) })]
+        static void entImpact(EntityProjectile __instance, Entity target)
         {
             if (__instance.ProjectileStack?.Attributes?.GetString("tip") == "explosive" && __instance.Api.Side == EnumAppSide.Server && UsefulStuffConfig.Loaded.ExplosiveArrowEnabled)
             {
-                (__instance.World as IServerWorldAccessor).CreateExplosion(__instance.ServerPos.AsBlockPos, EnumBlastType.RockBlast, 1, 3);
+                (__instance.World as IServerWorldAccessor).CreateExplosion(__instance.Pos.AsBlockPos, EnumBlastType.RockBlast, 1, 3);
                 if (__instance.Alive) __instance.Die();
             }
 
-            if (entity.Properties.Attributes?.IsTrue("isMechanical") == false && __instance.ProjectileStack?.Attributes?.GetString("tip") == "tranq" && UsefulStuffConfig.Loaded.TranqArrowEnabled)
+            if (target.Properties.Attributes?.IsTrue("isMechanical") == false && __instance.ProjectileStack?.Attributes?.GetString("tip") == "tranq" && UsefulStuffConfig.Loaded.TranqArrowEnabled)
             {
                 var poison = new TranqEffect();
-                poison.Apply(entity);
+                poison.Apply(target);
                 if (__instance.Alive) __instance.ProjectileStack?.Attributes?.RemoveAttribute("tip");
             }
 
             if (__instance.ProjectileStack?.Attributes?.GetString("tip") == "cardiac" && UsefulStuffConfig.Loaded.CardiacArrowEnabled)
             {
-                if (entity.Properties.Attributes?.IsTrue("isMechanical") == false && BuffManager.GetActiveBuff(entity, "CardiacEffect") == null)
+                if (target.Properties.Attributes?.IsTrue("isMechanical") == false && BuffManager.GetActiveBuff(target, "CardiacEffect") == null)
                 {
                     var poison = new CardiacEffect();
                     poison.Init(1f, 0.75f);
-                    poison.Apply(entity);
+                    poison.Apply(target);
                 }
                 if (__instance.Alive) __instance.ProjectileStack?.Attributes?.RemoveAttribute("tip");
             }
 
             if (__instance.ProjectileStack?.Attributes?.GetString("tip") == "incendiary" && UsefulStuffConfig.Loaded.FireArrowEnabled)
             {
-                entity.Ignite();
+                target.Ignite();
                 if (__instance.Alive) __instance.ProjectileStack?.Attributes?.RemoveAttribute("tip");
             }
 
@@ -148,11 +150,11 @@ namespace UsefulStuff
 
                 if (bee != null)
                 {
-                    bee.ServerPos.X = __instance.SidedPos.X + 0.5f;
-                    bee.ServerPos.Y = __instance.SidedPos.Y + 0.5f;
-                    bee.ServerPos.Z = __instance.SidedPos.Z + 0.5f;
-                    bee.ServerPos.Yaw = (float)__instance.World.Rand.NextDouble() * 2 * GameMath.PI;
-                    bee.Pos.SetFrom(bee.ServerPos);
+                    bee.Pos.X = __instance.Pos.X + 0.5f;
+                    bee.Pos.Y = __instance.Pos.Y + 0.5f;
+                    bee.Pos.Z = __instance.Pos.Z + 0.5f;
+                    bee.Pos.Yaw = (float)__instance.World.Rand.NextDouble() * 2 * GameMath.PI;
+                    bee.Pos.SetFrom(bee.Pos);
 
                     bee.Attributes.SetString("origin", "beearrow");
                     __instance.World.SpawnEntity(bee);
@@ -176,7 +178,7 @@ namespace UsefulStuff
         [HarmonyPostfix]
         static void TipDesc(StringBuilder dsc, ItemSlot inSlot)
         {
-            string tip = inSlot.Itemstack?.Attributes.GetString("tip");
+            string tip = inSlot?.Itemstack?.Attributes?.GetString("tip");
 
             if (tip == null || dsc.ToString().Contains(Lang.Get("usefulstuff:arrowtip-" + tip))) return;
             dsc.AppendLine(Lang.GetIfExists("usefulstuff:arrowtip-" + tip));
@@ -204,11 +206,11 @@ namespace UsefulStuff
 
         [HarmonyPatch("OnCreatedByCrafting")]
         [HarmonyPostfix]
-        static void QuenchedMaterialsCraftIntoQuenchedCollectibles(ItemSlot[] allInputslots, ItemSlot outputSlot)
+        static void QuenchedMaterialsCraftIntoQuenchedCollectibles(ItemSlot[] allInputSlots, ItemSlot outputSlot, IRecipeBase byRecipe)
         {
             if (outputSlot.Itemstack?.Collectible.Tool == null || !UsefulStuffConfig.Loaded.QuenchBonusMats.Contains(outputSlot.Itemstack.Collectible.LastCodePart())) return;
             bool quench = false;
-            foreach (ItemSlot slot in allInputslots)
+            foreach (ItemSlot slot in allInputSlots)
             {
                 if (slot.Itemstack?.Attributes.GetBool("quenched") == true)
                 {
@@ -302,12 +304,12 @@ namespace UsefulStuff
 
         [HarmonyPatch("DamageItem")]
         [HarmonyPrefix]
-        static void ChangeToScraps(IWorldAccessor world, Entity byEntity, ItemSlot itemslot, CollectibleObject __instance, int amount = 1)
+        static void ChangeToScraps(IWorldAccessor world, Entity byEntity, ItemSlot itemSlot, CollectibleObject __instance, int amount = 1, bool destroyOnZeroDurability = true)
         {
             if (world.Side != EnumAppSide.Server || byEntity == null || __instance.Attributes?["brokenReturn"] == null) return;
-            IItemStack itemstack = itemslot.Itemstack;
+            IItemStack itemstack = itemSlot.Itemstack;
 
-            int leftDurability = itemstack.Attributes.GetInt("durability", __instance.GetMaxDurability(itemslot.Itemstack));
+            int leftDurability = itemstack.Attributes.GetInt("durability", __instance.GetMaxDurability(itemSlot.Itemstack));
             leftDurability -= amount;
 
             if (leftDurability <= 0)
@@ -318,7 +320,7 @@ namespace UsefulStuff
                 stacks[randomItem].Resolve(world, "brokentool", false);
                 if (stacks[randomItem].ResolvedItemstack != null)
                 {
-                    world.SpawnItemEntity(stacks[randomItem].ResolvedItemstack.Clone(), byEntity.ServerPos.XYZ);
+                    world.SpawnItemEntity(stacks[randomItem].ResolvedItemstack.Clone(), byEntity.Pos.XYZ);
                 }
             }
         }
@@ -327,7 +329,7 @@ namespace UsefulStuff
         [HarmonyPostfix]
         static void NameTagName(ItemStack itemStack, ref string __result)
         {
-            string nametag = itemStack.Attributes?.GetString("nametagName");
+            string nametag = itemStack?.Attributes?.GetString("nametagName");
             if (nametag != null) __result = nametag;
         }
     }

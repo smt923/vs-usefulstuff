@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using Vintagestory.API.Common;
@@ -19,7 +19,7 @@ namespace UsefulStuff
 
         public override void Start(ICoreAPI papi)
         {
-            base.Start(api);
+            base.Start(papi);
 
             api = papi;
 

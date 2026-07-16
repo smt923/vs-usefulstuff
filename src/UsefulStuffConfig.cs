@@ -1,4 +1,4 @@
-﻿namespace UsefulStuff
+namespace UsefulStuff
 {
     public class UsefulStuffConfig
     {

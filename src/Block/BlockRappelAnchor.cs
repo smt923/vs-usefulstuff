@@ -1,4 +1,4 @@
-﻿using Vintagestory.API.Client;
+using Vintagestory.API.Client;
 using Vintagestory.API.Common;
 using Vintagestory.API.MathTools;
 
@@ -48,7 +48,7 @@ namespace UsefulStuff
                     ItemStack retracted = new ItemStack(api.World.GetItem(new AssetLocation("game:rope")), ropeTied);
                     if (!byPlayer.InventoryManager.TryGiveItemstack(retracted))
                     {
-                        world.SpawnItemEntity(retracted, byPlayer.Entity.SidedPos.XYZ);
+                        world.SpawnItemEntity(retracted, byPlayer.Entity.Pos.XYZ);
                     }
                 }
 

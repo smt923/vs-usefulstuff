@@ -1,12 +1,11 @@
-﻿using Vintagestory.API.Common;
-using System;
-using Vintagestory.GameContent;
+using Vintagestory.API.Common;
 using Vintagestory.API.Common.Entities;
 using Vintagestory.API.MathTools;
+using System;
 
 namespace UsefulStuff
 {
-    public class ItemGasMask : ItemWearable
+    public class ItemGasMask : Item
     {
         public override int GetMergableQuantity(ItemStack sinkStack, ItemStack sourceStack, EnumMergePriority priority)
         {
@@ -25,7 +24,7 @@ namespace UsefulStuff
         {
             if (op.CurrentPriority == EnumMergePriority.DirectMerge)
             {
-                int durability; 
+                int durability;
                 if ((durability = op.SinkSlot.Itemstack.Attributes.GetInt("durability", Durability)) < Durability && op.SourceSlot.Itemstack.Collectible.Code.Path.Contains("charcoal"))
                 {
                     op.MovedQuantity = 1;
@@ -37,17 +36,15 @@ namespace UsefulStuff
             base.TryMergeStacks(op);
         }
 
-        public override void DamageItem(IWorldAccessor world, Entity byEntity, ItemSlot itemslot, int amount = 1)
+        public override void DamageItem(IWorldAccessor world, Entity byEntity, ItemSlot itemslot, int amount = 1, bool destroyOnZeroDurability = true)
         {
-            {
-                ItemStack itemstack = itemslot.Itemstack;
+            ItemStack itemstack = itemslot.Itemstack;
 
-                int leftDurability = itemstack.Attributes.GetInt("durability", GetMaxDurability(itemstack));
-                leftDurability = GameMath.Clamp(leftDurability - amount, 0, Durability);
-                itemstack.Attributes.SetInt("durability", leftDurability);
+            int leftDurability = itemstack.Attributes.GetInt("durability", Durability);
+            leftDurability = GameMath.Clamp(leftDurability - amount, 0, Durability);
+            itemstack.Attributes.SetInt("durability", leftDurability);
 
-                itemslot.MarkDirty();
-            }
+            itemslot.MarkDirty();
         }
     }
 }

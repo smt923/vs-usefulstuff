@@ -1,4 +1,4 @@
-﻿using Vintagestory.API.Common;
+using Vintagestory.API.Common;
 using Vintagestory.GameContent;
 using Vintagestory.API.Client;
 using System.Linq;

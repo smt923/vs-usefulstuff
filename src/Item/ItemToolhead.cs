@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using Vintagestory.API.Common;
 using Vintagestory.API.Util;
 using Vintagestory.API.Config;
@@ -25,9 +25,9 @@ namespace UsefulStuff
             if (UsefulStuffConfig.Loaded.QuenchEnabled && UsefulStuffConfig.Loaded.QuenchBonusMats.Contains(LastCodePart()) && inSlot.Itemstack.Attributes.GetBool("quenched")) dsc.AppendLine(Lang.Get("usefulstuff:Quenched"));
         }
 
-        public override bool MatchesForCrafting(ItemStack inputStack, GridRecipe gridRecipe, CraftingRecipeIngredient ingredient)
+        public override bool MatchesForCrafting(ItemStack inputStack, IRecipeBase recipe, IRecipeIngredient ingredient)
         {
-            bool result = base.MatchesForCrafting(inputStack, gridRecipe, ingredient);
+            bool result = base.MatchesForCrafting(inputStack, recipe, ingredient);
             if (!UsefulStuffConfig.Loaded.QuenchEnabled || !UsefulStuffConfig.Loaded.QuenchBonusMats.Contains(LastCodePart())) return result;
 
             result &= !inputStack.Attributes.GetBool("quenched") || inputStack.Attributes.GetTreeAttribute("temperature")?.GetFloat("temperature") < 200;

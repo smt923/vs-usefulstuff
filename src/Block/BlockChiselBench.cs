@@ -1,4 +1,4 @@
-﻿using Vintagestory.API.Common;
+using Vintagestory.API.Common;
 using Vintagestory.API.Client;
 using Vintagestory.GameContent;
 using System.Collections.Generic;

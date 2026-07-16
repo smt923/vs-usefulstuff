@@ -1,4 +1,4 @@
-﻿using System.Threading.Tasks;
+using System.Threading.Tasks;
 using Vintagestory.API.Common;
 using System.Reflection;
 using Vintagestory.ServerMods;

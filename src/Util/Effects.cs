@@ -1,4 +1,4 @@
-﻿using BuffStuff;
+using BuffStuff;
 using ProtoBuf;
 using System;
 using System.Collections.Generic;
@@ -40,7 +40,7 @@ namespace UsefulStuff
 
         public override void OnTick()
         {
-            EffectParticles.MinPos = entity.SidedPos.XYZ;
+            EffectParticles.MinPos = entity.Pos.XYZ;
             EffectParticles.AddPos = new Vec3d(0.5, 0.5, 0.5);
             entity.World.SpawnParticles(EffectParticles);
         }
