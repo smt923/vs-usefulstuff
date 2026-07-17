@@ -6,18 +6,18 @@
 	vertexFlags: {
 		zOffset: 3
 	},
-  attributes: {
-    merchants: [
-      "humanoid-trader-foods",
-      "humanoid-trader-artisan",
-      "humanoid-trader-buildmaterials",
-      "humanoid-trader-furniture",
-      "humanoid-trader-luxuries",
-      "humanoid-trader-treasurehunter",
-      "humanoid-trader-clothing",
-      "humanoid-trader-survivalgoods",
-      "humanoid-trader-commodities"
-    ],
+	attributes: {
+		merchants: [
+		"humanoid-trader-foods",
+		"humanoid-trader-artisan",
+		"humanoid-trader-buildmaterials",
+		"humanoid-trader-furniture",
+		"humanoid-trader-luxuries",
+		"humanoid-trader-treasurehunter",
+		"humanoid-trader-clothing",
+		"humanoid-trader-survivalgoods",
+		"humanoid-trader-commodities"
+	],
 		badFood: [
 			"game:bowl-*",
 			"mushroom-flyagaric-*"
@@ -27,9 +27,9 @@
 			{ type: "item", code: "gear-rusty", quantity: 4  },
 			{ type: "item", code: "gear-rusty", quantity: 3  },
 		],
-    minTravelDays: 3,
-    maxTravelDays: 4,
-    stayDays: 1
+	minTravelDays: 3,
+	maxTravelDays: 4,
+	stayDays: 1
   },
 	sidesolid: { all: false },
 	sideopaque: { all: false },

@@ -1,8 +1,8 @@
 {
 	code: "chiselbench",
-  class: "BlockChiselBench",
-  tags: ["block", "craftingstation"],
-  entityClass: "ChiselBench",
+	class: "BlockChiselBench",
+	tags: ["block", "craftingstation"],
+	entityClass: "ChiselBench",
 	behaviors: [{name: "HorizontalOrientable"}],
 	shape: { base: "game:block/basic/cube" },
 	drawtype: "cube",

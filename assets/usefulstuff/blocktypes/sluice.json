@@ -2,8 +2,8 @@
 	code: "sluice",
 	tags: ["block", "panning"],
 	behaviors: [{name: "HorizontalOrientable"}],
-  entityclass: "BESluice",
-  shapebytype: {
+	entityclass: "BESluice",
+	shapebytype: {
 		"*-north": { base: "block/wood/sluice", rotateY: 0 },
 		"*-east": { base: "block/wood/sluice", rotateY: 270 },
 		"*-south": { base: "block/wood/sluice", rotateY: 180 },
@@ -28,9 +28,9 @@
 		all: false
 	},
 	textures: {
-    all : { base: "game:block/wood/planks/pine1" },
-    "water" : { base: "game:block/liquid/waterportion" },
-  },
+		all : { base: "game:block/wood/planks/pine1" },
+		"water" : { base: "game:block/liquid/waterportion" },
+	},
 	sounds: {
 		"place": "game:block/planks",
 		"hit": "game:block/planks",

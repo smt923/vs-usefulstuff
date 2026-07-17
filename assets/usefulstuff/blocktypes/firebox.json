@@ -1,17 +1,17 @@
 {
-  code: "firebox",
-  class: "BlockFireBox",
-  tags: ["block", "kiln"],
-  entityClass: "FireBox",
+	code: "firebox",
+	class: "BlockFireBox",
+	tags: ["block", "kiln"],
+	entityClass: "FireBox",
 	attributes: {
-    fuelTypes: {
-      "firewood" : 32,
+	fuelTypes: {
+			"firewood" : 32,
 			"charcoal" : 8,
 			"ore-bituminouscoal" : 8,
 			"ore-lignite" : 8,
 			"peatbrick" : 16
-    },
-  multiblockStructure: {
+	},
+	multiblockStructure: {
 	blockNumbers: {
 		"air": 1,
 		"mudbrick-*": 2,
