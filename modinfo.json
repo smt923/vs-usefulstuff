@@ -1,12 +1,12 @@
 {
   "type": "code",
-  "modid": "usefulstuff17",
+  "modid": "usefulstuff22",
   "name": "Still Useful Stuff",
-  "authors": [ "jakecool19", "Stahl" ],
+  "authors": [ "jakecool19", "Stahl", "smt923" ],
   "contributors": [ "DArkHekRoMaNT" , "Hexedian"],
   "description": "Continuation of jakecool19's' Useful Stuff.",
   "version": "1.5.2",
-  "website": "https://github.com/antoinehu/vs-usefulstuff",
+  "website": "https://github.com/smt923/vs-usefulstuff",
   "dependencies": {
     "game": "1.22.0"
   }
