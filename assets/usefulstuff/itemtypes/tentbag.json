@@ -1,5 +1,6 @@
 {
 	code: "tentbag",
+	tags: ["container", "bag"],
 	maxstacksize: 1,
 	shape: { base: "game:item/bag/linensack" },
   class: "Tentbag",

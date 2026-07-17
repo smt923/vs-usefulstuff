@@ -1,5 +1,6 @@
 {
 	code: "climbingrope",
+	tags: ["block", "movement", "climbing"],
 	enabled: false,
   classByType:{
     "*-start-*": "BlockRappelAnchor",

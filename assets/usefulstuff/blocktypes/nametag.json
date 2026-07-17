@@ -1,5 +1,6 @@
 {
 	code: "nametag",
+	tags: ["block", "decorative"],
 	classByType: {
 		"*-burned": "BlockNameTag",
 	},

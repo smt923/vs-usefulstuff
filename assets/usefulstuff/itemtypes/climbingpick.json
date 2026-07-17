@@ -1,6 +1,7 @@
 {
-	"code": "climbingpick",
-	"class": "ItemClimbingPick",
+  "code": "climbingpick",
+  "tags": ["tool", "movement", "climbing"],
+  "class": "ItemClimbingPick",
 	"behaviors": [
 		{
 			"name": "GroundStorable",

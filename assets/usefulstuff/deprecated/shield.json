@@ -1,5 +1,6 @@
 {
 	code: "shield",
+	tags: ["weapon", "weapon-melee", "shield"],
 	class: "ItemShield",
 	variantgroups: [
 		{code: "covering", states: ["wicker", "pelt", "leather", "linen"]}

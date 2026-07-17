@@ -1,5 +1,6 @@
 {
   "code": "glider",
+  "tags": ["tool", "movement"],
   "maxstacksize": 1,
   "behaviors": [
     {

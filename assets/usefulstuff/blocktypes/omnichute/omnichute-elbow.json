@@ -1,6 +1,7 @@
 {
 	code: "omnichute",
 	class: "BlockOmniChute",
+  tags: ["block", "transport"],
   entityclass: "ItemFlow",
 	behaviors: [
 		{ name: "Lockable" }

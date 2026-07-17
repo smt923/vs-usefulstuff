@@ -1,5 +1,6 @@
 {
 	code: "potteryholder",
+	tags: ["block", "pottery"],
 	entityClass: "PotteryHolder",
 	behaviors: [{name: "UnstableFalling"}],
 	attributes: {

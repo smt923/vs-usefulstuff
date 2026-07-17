@@ -1,5 +1,6 @@
 {
 	code: "sluice",
+	tags: ["block", "panning"],
 	behaviors: [{name: "HorizontalOrientable"}],
   entityclass: "BESluice",
   shapebytype: {
