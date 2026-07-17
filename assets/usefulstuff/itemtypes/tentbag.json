@@ -36,6 +36,9 @@
 		scale: 2.5
 	},
 	attributes: {
+		handbook: {
+			groupBy: ["tentbag-*"]
+		},
     emptyBag: "usefulstuff:tentbag-empty",
     packedBag: "usefulstuff:tentbag-packed",
 		whitelist: false,

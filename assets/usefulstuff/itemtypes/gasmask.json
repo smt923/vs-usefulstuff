@@ -2,6 +2,9 @@
 	code: "gasmask",
 	tags: ["clothing", "face", "protection"],
 	class: "ItemGasMask",
+	behaviors: [
+		{ "name": "Wearable" }
+	],
 	shape: {
 			base: "usefulstuff:item/clothing/gasmask"
 		},

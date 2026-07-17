@@ -5,7 +5,7 @@
   "authors": [ "jakecool19", "Stahl", "smt923" ],
   "contributors": [ "DArkHekRoMaNT" , "Hexedian"],
   "description": "Continuation of jakecool19's' Useful Stuff.",
-  "version": "1.5.2",
+  "version": "1.5.4",
   "website": "https://github.com/smt923/vs-usefulstuff",
   "dependencies": {
     "game": "1.22.0"
